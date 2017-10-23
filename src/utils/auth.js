@@ -20,6 +20,11 @@ export class auth {
     }
   }
 
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('exp');    
+  }
+
   tokenHasExpired(unixTime) {
     const now = Date.now();    
     if ((unixTime * 1000) > now) {

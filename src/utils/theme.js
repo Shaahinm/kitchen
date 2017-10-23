@@ -11,7 +11,10 @@ export class Theme {
           color: 'blue-grey',
           hue: 500
         },    
-        accent: 'amber',
+        accent: {
+          color: 'amber',
+          hue: 900
+        },
         warn: 'deep-orange',
         background: {
           color: 'grey',

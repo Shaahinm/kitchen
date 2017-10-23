@@ -45,7 +45,7 @@ export class HttpCall {
     axios.get(`${baseURL}/${endpoint}`, {
         params: params
       }, this.header())
-      .then((response) => {
+      .then((response) => {        
         context.success(response);
       }).catch((response) => {
         context.error(ServerError.getErrorByNumber(response.response.status));

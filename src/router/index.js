@@ -6,7 +6,7 @@ import Navbar from '@/components/layout/navbar.vue'
 import Kitchen from '@/components/Kitchen.vue'
 import SearchBar from '@/components/SearchBar.vue'
 import Login from '@/components/authentication/login'
-
+import Register from '@/components/authentication/register'
 
 Vue.use(Router)
 Vue.component('navbar', Navbar)
@@ -19,6 +19,7 @@ export default new Router({
     { path: '/about', name: 'about', component: About },
     { path: '/kitchen', name: 'kitchen', component: Kitchen},
     { path: '/authentication/login', name: 'login', component: Login},
+    { path: '/authentication/register', name: 'register', component: Register},
     { path: '*', redirect: '/' }
   ]
 })
