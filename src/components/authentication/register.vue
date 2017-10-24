@@ -12,7 +12,7 @@
         </md-input-container>
         <md-input-container md-has-password dir="ltr">
             <md-icon>security</md-icon>
-            <label>کلمه عبور</label>
+            <label>کلمه عبور</label> 
             <md-input required v-model="password" type="password" :class="{'md-input-invalid': 'passwordValid'}"></md-input>            
             <span class="md-error">{{invalidPasswordMessage}}</span>
         </md-input-container>
