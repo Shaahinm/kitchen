@@ -3,7 +3,7 @@ export class Theme {
         root.material.registerTheme('default', this.baseTheme)
         root.material.registerTheme('alternative', {
           ...this.baseTheme,
-          accent: 'white'
+          accent: 'white',
         })
     }
     baseTheme = {

@@ -92,25 +92,7 @@ export default {
         }
       );
       apiCall.post("authentication/token", payload, context);
-    },
-    test() {
-     let options = {
-        action: {
-          text: "بستن",
-          onClick: (e, toastObject) => {
-            toastObject.goAway(0);
-          }
-        },
-        position: "bottom-left",
-        duration: 4000,
-        theme: "primary",
-        fullWidth: true,
-        fitToScreen: true
-      };
-       let myToast = this.$toasted
-            .show(`خوش آمدید .`, options)
-            .goAway(5000);
-  },
+    }  
   },  
   watch: {
     email: function() {
@@ -124,7 +106,7 @@ export default {
       }
     },
     password: function() {
-      if (this.password.length > 8) {
+      if (this.password.length > 7) {
         this.passwordValid = true;
         this.invalidPasswordMessage = "";
       } else {

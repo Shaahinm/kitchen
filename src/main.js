@@ -13,11 +13,13 @@ import {Theme} from './utils/theme'
 
 import 'vue-material/dist/vue-material.css'
 
+
 Vue.use(VueMaterial)
 Vue.use(Toasted)
 Vue.use(BlockUI)
 Vue.use(VueProgressiveImage)
 Vue.config.productionTip = false
+
 
 new Notification(Vue);
 new Theme(Vue);
