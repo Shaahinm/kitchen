@@ -46,14 +46,21 @@ export class versionManager {
     var version = this.getCacheFromServer();
   }
 
-  static getCacheFromServer() {
+  static getCacheFromServer(observer) {
     axios.get(settingsUrl)
       .then((res) => {
         localStorage.setItem('settings', JSON.stringify(res.data.item));
         localStorage.setItem('client-version', res.data.version);
+        if(observer !== undefined) {
+            observer();
+        }
       }).catch((res) => {
         console.log('there was a problem updating cache, please try again later!')
       })
+  }
+
+  static triggerUpdate(caller) {      
+      this.getCacheFromServer(caller);      
   }
 
 

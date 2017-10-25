@@ -10,7 +10,7 @@
       <md-layout>
       <kitchen-main :favs="favs" :recipes="recepies"></kitchen-main>
       </md-layout>
-      <button @click="test()">asjkdhashdas</button>
+      <button @click="getCategories()">asjkdhashdas</button>
     </md-layout>      
   </md-layout>
 </template>
@@ -32,22 +32,24 @@ export default {
     };
   },
   methods: {
-    test: function() {
+    test() {
       var a = new HttpCall();
 
-      var context = a.getContext(
-        success => {          
-        },
-        error => {          
-        }
-      );
-
-
-      a.get('recipes', context);
+      var context = a.getContext(success => {}, error => {});
+      a.get("recipes", context);
+    },
+    getCategories() {
+      if (localStorage.getItem('settings') === null) {
+        var a = new HttpCall();
+        a.triggerCacheUpdate(() => {          
+           console.log("shaahin");
+        });
+      } else {
+        console.log("shaahin");
+      }
     }
   },
-  mounted() {    
-  }
+  mounted() {}
 };
 </script>
 <style lang="scss" scoped>

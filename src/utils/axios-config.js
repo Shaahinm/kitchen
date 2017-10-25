@@ -68,17 +68,14 @@ export class HttpCall {
     versionManager.handle(versionManager.getToken());
   }
 
+  triggerCacheUpdate(caller) {
+    versionManager.triggerUpdate(caller);
+  }
+
   getContext(a, b) {
     return {
       success: a,
       error: b
     }
-  }
-
-
-  call() {
-    return axios.create({
-      baseURL: this.url
-    });
-  }
+  }  
 }
