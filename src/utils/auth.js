@@ -14,7 +14,7 @@ export class auth {
   }
 
   getUserName() {
-    if(this.tokenExists()) {
+    if (this.tokenExists()) {
       var token = this.decode();
       return token.firstname + ' ' + token.lastname;
     }
@@ -22,11 +22,11 @@ export class auth {
 
   logout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('exp');    
+    localStorage.removeItem('exp');
   }
 
   tokenHasExpired(unixTime) {
-    const now = Date.now();    
+    const now = Date.now();
     if ((unixTime * 1000) > now) {
       return false;
     }
@@ -40,11 +40,11 @@ export class auth {
 
   isLoggedIn() {
     if (this.tokenExists()) {
-      var token = this.decode();      
-      if (!this.tokenHasExpired(token.exp)) {        
+      var token = this.decode();
+      if (!this.tokenHasExpired(token.exp)) {
         return true;
       }
-    }    
+    }
     return false;
   }
 }

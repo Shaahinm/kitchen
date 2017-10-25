@@ -10,6 +10,7 @@
       <md-layout>
       <kitchen-main :favs="favs" :recipes="recepies"></kitchen-main>
       </md-layout>
+      <button @click="test()">asjkdhashdas</button>
     </md-layout>      
   </md-layout>
 </template>
@@ -30,19 +31,35 @@ export default {
       html: '<img src="static/puff.svg" />'
     };
   },
-  mounted() {}
+  methods: {
+    test: function() {
+      var a = new HttpCall();
+
+      var context = a.getContext(
+        success => {          
+        },
+        error => {          
+        }
+      );
+
+
+      a.get('recipes', context);
+    }
+  },
+  mounted() {    
+  }
 };
 </script>
 <style lang="scss" scoped>
-  .md-layout {
-     overflow-y: auto;     
-  }
+.md-layout {
+  overflow-y: auto;
+}
 
-  .sidebar {
-    @media (max-width: 767px) {
-      flex-direction: column;
-      max-height: 200px;
-    }
+.sidebar {
+  @media (max-width: 767px) {
+    flex-direction: column;
+    max-height: 200px;
   }
+}
 </style>
 

@@ -5,6 +5,9 @@ import {
 import {
   ServerError
 } from './config/errorList'
+import {
+  versionManager
+} from './config/versionManager'
 // export const gapi = axios.create({
 //     baseURL: `http://localhost:54161/`,
 //     headers: {
@@ -17,7 +20,6 @@ import {
 // });
 
 const baseURL = `http://localhost:49716/api`;
-
 export class HttpCall {
 
   header() {
@@ -32,20 +34,21 @@ export class HttpCall {
     return null;
   }
 
-  get(endpoint, context) {
+  get(endpoint, context) {    
     axios.get(`${baseURL}/${endpoint}`, this.header())
       .then((response) => {
-        context.success(response);
+        versionManager.handle(response.data.version);
+        context.success(response);        
       }).catch((response) => {
         context.error(ServerError.getErrorByNumber(response.response.status));
       });
   }
 
-  get(endpoint, params, context) {
+  getByParams(endpoint, params, context) {
     axios.get(`${baseURL}/${endpoint}`, {
         params: params
       }, this.header())
-      .then((response) => {        
+      .then((response) => {
         context.success(response);
       }).catch((response) => {
         context.error(ServerError.getErrorByNumber(response.response.status));
@@ -61,14 +64,8 @@ export class HttpCall {
       });
   }
 
-  test(endpoint, params, context) {
-
-    axios.post(`${baseURL}/${endpoint}`, params, this.header())
-      .then((response) => {
-        context.success(response);
-      }).catch((response) => {
-        context.error(ServerError.getErrorByNumber(response.response.status));
-      });
+  test(version) {        
+    versionManager.handle(versionManager.getToken());
   }
 
   getContext(a, b) {
