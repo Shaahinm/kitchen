@@ -27,6 +27,6 @@ export class Notification{
         position: 'bottom-center',
         duration: 4000,
         theme: 'primary',  
-      });
+      });      
     }
   }
