@@ -11,11 +11,15 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "bulma": "^0.6.0",
     "jwt-decode": "^2.2.0",
+    "vee-validate": "^2.0.0-rc.19",
     "vue": "^2.5.2",
     "vue-blockui": "^1.1.6",
     "vue-material": "^0.7.5",
+    "vue-progressbar": "^0.7.3",
     "vue-progressive-image": "^2.3.1",
+    "vue-quill-editor": "^2.3.3",
     "vue-router": "^3.0.1",
     "vue-toasted": "^1.1.21"
   },

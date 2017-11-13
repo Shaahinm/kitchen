@@ -1,5 +1,5 @@
 <template>
-  <md-layout md-align="center" md-gutter="16">   
+  <!-- <md-layout md-align="center" md-gutter="16">   
   <BlockUI v-if="isLoading" :html="html" message="لطفآ منتظر بمانید..."></BlockUI>      
   <md-layout md-flex="20" md-align="center" md-flex-xsmall="100" md-flex-small="100" md-flex-medium="50" md-vertical-align="center  ">
       <h1>ثبت نام</h1>
@@ -36,12 +36,82 @@
         </md-layout>                        
     </form>    
   </md-layout>  
-</md-layout>
+</md-layout> -->
+  <section class="section">
+    <BlockUI v-if="isLoading" :html="html" message="لطفآ منتظر بمانید..."></BlockUI>      
+    <div class="columns">  
+      <div class="column">
+        <div class="box">
+          <h1>ورود به حساب کاربری</h1>
+            <div class="field" dir="ltr">
+              <label class="label" dir="rtl">ایمیل</label>
+              <div class="control has-icons-left has-icons-right">
+                <input v-model="email" class="input" :class="{'is-danger': !emailValid}" type="email" placeholder="ایمیل خود را وارد نمایید">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-envelope"></i>
+                </span>              
+                <span v-if="!emailValid" class="icon is-small is-right">
+                  <i class="fa fa-warning"></i>
+                </span>
+              </div>
+              <p dir="rtl" class="help my-height is-danger">{{invalidEmailMessage}}</p>
+            </div>
+            <div class="field" dir="ltr">
+              <label class="label" dir="rtl">کلمه عبور</label>
+              <div class="control has-icons-left has-icons-right">
+                <input v-model="password" :class="{'is-danger': !passwordValid}" class="input" type="password">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-lock"></i>
+                </span>
+                <span v-if="!passwordValid" class="icon is-small is-right">
+                  <i class="fa fa-warning"></i>
+                </span>
+              </div>
+              <p dir="rtl" class="help my-height is-danger">{{invalidPasswordMessage}}</p>
+            </div>
+
+            <div class="field">
+              <label class="label" dir="rtl">نام</label>
+              <div class="control has-icons-left has-icons-right">
+                <input v-model="firstname" class="input" :class="{'is-danger': !firstnameValid}" type="text" placeholder="نام خود را وارد نمایید">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-envelope"></i>
+                </span>              
+                <span v-if="!firstnameValid" class="icon is-small is-right">
+                  <i class="fa fa-warning"></i>
+                </span>
+              </div>
+              <p dir="rtl" class="help my-height is-danger">{{invalidFirstnameMessage}}</p>
+            </div>
+            <div class="field">
+              <label class="label" dir="rtl">نام خانوادگی</label>
+              <div class="control has-icons-left has-icons-right">
+                <input @keyup.enter="register()"  v-model="lastname" class="input" :class="{'is-danger': !lastnameValid}" type="text" placeholder="نام خانوادگی خود را وارد نمایید">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-envelope"></i>
+                </span>              
+                <span v-if="!lastnameValid" class="icon is-small is-right">
+                  <i class="fa fa-warning"></i>
+                </span>
+              </div>
+              <p dir="rtl" class="help my-height is-danger">{{invalidLastnameMessage}}</p>
+            </div>
+            <div class="field is-grouped">
+            <div class="control">
+              <button v-bind:disabled="(!emailValid || !passwordValid || !firstnameValid || !lastnameValid)" @click="register()" class="button is-link">ثبت نام</button>
+            </div>
+            <div class="control">
+              <router-link class="button is-white" to="login">قبلا ثبت نام کرده اید؟ وارد شوید</router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 <script>
 import { HttpCall } from "./../../utils/axios-config";
 import { auth } from "./../../utils/auth";
-// import Snackbar from './../snackbar'
 export default {
   data() {
     return {
@@ -99,7 +169,7 @@ export default {
           this.isLoading = false;
         }
       );
-      apiCall.post("authentication/register", payload, context);
+      apiCall.authentication("authentication/register", payload, context);
     }  
   },
   watch: {
@@ -149,21 +219,18 @@ export default {
 };
 </script>
 
-<style lang="scss">
-form {
-  width: 98%;
-  height: 400px;
+<style lang="scss" scoped>
+.column {
+  align-content: center;
+  // text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
 }
-.md-input-container {
-  margin-top: 20px;
+.columns .field {
+  margin-top: 24px;
 }
-.md-checkbox-label {
-  margin-right: 8px !important;
-}
-
-.md-input-container .md-error {
-  opacity: 1;
-  color: red;
+.my-height{
+  min-height: 18px;
 }
 </style>
 

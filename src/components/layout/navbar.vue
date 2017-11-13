@@ -1,151 +1,104 @@
 <template>
-  <div>
-    <md-whiteframe class="main-header">
-      <md-toolbar class="md-large">
-        <div class="page-wrapper">
-          <div class="md-toolbar-container">
-            <md-button class="main-menu-trigger md-icon-button" @click.native="toggleSidenav">
-              <md-icon md-src="static/icon-menu.svg" />
-            </md-button>            
-            <md-icon md-src="static/icon-github.svg" />
-
-            <h1 class="md-title md-flex">آشپزخانه</h1>            
-            <!-- <nav class="main-navigation">              
-              <md-button class="md-dense">ورود</md-button>
-              <md-button class="md-dense">تماس با ما</md-button>
-              <md-button class="md-dense">درباره ما</md-button>
-            </nav> -->
-             <md-tabs md-theme="alternative" class="main-navigation" @change="changeTab">
-              <md-tab v-for="item in nav" :key="item.url" :md-label="item.label"/>
-            </md-tabs>  
-          </div>
-          <div class="md-toolbar-container">
-            <searchbar></searchbar>
-            <!-- <md-tabs md-theme="alternative" @change="changeTab">
-              <md-tab v-for="item in nav" :key="item.url" :md-label="item.label"/>
-            </md-tabs>             -->
+<section class="hero is-info">
+  <!-- Hero head: will stick at the top -->
+  <div class="hero-head">
+    <!-- <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item">
+            <img src="https://bulma.io/images/bulma-type-white.png" alt="Logo">
+          </a>
+          <span class="navbar-burger burger" data-target="navbarMenuHeroA" @click="toggleNavbar()">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenuHeroA"  v-bind:class="{ 'is-active': isActive }" class="navbar-menu">
+          <div class="navbar-end">
+            <router-link class="navbar-item" :to="{ name: 'home' }" exact active-class="is-active">
+              خانه
+            </router-link>
+            <router-link class="navbar-item" :to="{ name: 'about'}" exact active-class="is-active">
+              درباره ما
+            </router-link>            
+            <span class="navbar-item">
+              <router-link active-class="is-active" class="button" to="/kitchen" exact>
+                <span class="icon">
+                  <i class="fa fa-download"></i>
+                </span>
+                <span>آشپزخانه من</span>
+              </router-link>
+            </span>
+            <span class="navbar-item">
+              <router-link active-class="is-active" class="button" to="/authentication/login" exact>
+                <span class="icon">
+                  <i class="fa fa-sign-in"></i>
+                </span>
+                <span>ورود</span>
+              </router-link>
+            </span>
           </div>
         </div>
-      </md-toolbar>
-    </md-whiteframe>
-
-    <md-sidenav class="main-sidenav md-right md-fixed" ref="sideNav" >
-      <md-list>
-        <md-list-item v-for="item in nav" :key="item.url">
-          <router-link exact :to="item.url">
-            <md-icon :md-src="`static/icon-${item.icon}.svg`" />
-            <span>{{item.label}}</span>
-          </router-link>
-        </md-list-item>
-      </md-list>
-    </md-sidenav>
-
-    <!-- <router-view /> -->
-
-    <md-speed-dial md-open="hover" class="md-fab-bottom-right">
-      <md-button class="md-fab" md-fab-trigger>
-        <md-icon md-icon-morph md-src="static/icon-code.svg" />
-        <md-icon md-src="static/icon-add.svg" />
-      </md-button>
-
-      <md-button class="md-fab md-primary md-mini md-clean">
-        <md-icon md-src="static/icon-note.svg" />
-      </md-button>
-
-      <md-button class="md-fab md-primary md-mini md-clean">
-        <md-icon md-src="static/icon-work.svg" />
-      </md-button>
-    </md-speed-dial>
+      </div>
+    </nav> -->
   </div>
+
+  <!-- Hero content: will be in the middle -->
+  <div class="hero-body">
+    <div class="container has-text-centered">      
+      <div class="field has-addons">
+        <p class="control">
+          <span class="select">
+            <select>
+              <option>همه</option>
+              <option>پیش غذا</option>
+              <option>نوشیدنی</option>
+              <option>دسر</option>
+            </select>
+          </span>
+        </p>
+        <p class="control has-icon-left is-expanded is-loading">
+          <input class="input" type="text" placeholder="جستجو در دستورات غذا">          
+        </p>
+        <p class="control">
+          <a class="button">
+            جستجو
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero footer: will stick at the bottom -->
+  <div class="hero-foot">
+    <nav class="tabs is-boxed is-fullwidth">
+      <div class="container">
+        <ul>          
+          <router-link tag="li" active-class="is-active" to="/kitchen" exact>
+          <a>            
+            <span>آشپزخانه من</span>
+            </a>
+          </router-link>      
+          <li><a>Modifiers</a></li>
+          <li><a>Grid</a></li>
+          <li><a>Elements</a></li>
+          <li><a>Components</a></li>
+          <li><a class="is-active">Layout</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</section>
 </template>
 
 
 <style lang="scss">
-@import "~vue-material/src/core/stylesheets/variables.scss";
-html,
-body {
-  height: 100%;
-  overflow: hidden;
+.hero-body {
+  padding: 1rem 1.5rem;
 }
-body {
-  display: flex;
-}
-.container {
-  min-height: 100%;
-  display: flex;
-  flex-flow: column nowrap;
-  flex: 1;
-  position: relative;
-}
-.page-wrapper {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-flow: column nowrap;
-  flex: 1;
-  position: relative;
-}
-.main-header {
-  position: relative;
-  .md-toolbar {
-    height: 128px;
-    overflow: hidden;
-    @media (max-width: 767px) {
-      height: 64px;
-      min-height: 64px;
-    }
-  }
-  .md-toolbar-container:last-child {
-    align-items: flex-end;
-    @media (max-width: 767px) {
-      // display: none;
-      height: 0;
-    }
-  }
-  .main-menu-trigger {
-    @media (min-width: 767px) {
-      display: none;
-    }
-    position: absolute;
-    left: 10px;
-    .md-icon {
-      top: 0;
-    }
-  }
-
-  .md-title {
-    @media (min-width: 767px) {
-      padding-left: 8px;
-    }
-  }
-  .main-navigation {
-    @media (max-width: 767px) {
-      display: none;
-    }
-    .md-button {
-      min-width: 0;
-      margin: 1px;
-      padding-right: 12px;
-      padding-left: 12px;
-    }
-  }
-  .md-tabs {
-    margin-left: 8px;
-    direction: ltr;
-  }
-  .md-tabs-content {
-    display: none;
-  }
-}
-.main-sidenav {
-  z-index: 4;
-  .router-link-exact-active {
-    font-weight: 700;
-  }
-}
-.md-button.md-fab .md-icon {
-  display: flex;
+.tabs ul {
+  flex-direction: row;
 }
 </style>
 
@@ -174,28 +127,15 @@ export default {
         icon: "code",
         label: "آشپزخانه من"
       }
-    ]
+    ],
+    isActive: false
   }),
   methods: {
-    toggleSidenav() {
-      this.$refs.sideNav.open();
-    },
-    toggleSearch() {
-      alert("abbas");
-    },
-    changeTab(item) {
-      const { url } = this.nav[item];
-      this.$router.push(url);
+    toggleNavbar() {
+      this.isActive = !this.isActive;
     }
   },
-  async mounted() {
-    await this.$nextTick();
-    this.$router.afterEach(() => {
-      if (this.$refs.sideNav) {
-        this.$refs.sideNav.close();
-      }
-    });
-  }
+  async mounted() {}
 };
 </script>
  

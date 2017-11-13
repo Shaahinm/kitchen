@@ -1,36 +1,56 @@
 <template>
-  <md-layout md-align="center" md-gutter="16">   
-  <BlockUI v-if="isLoading" :html="html" message="لطفآ منتظر بمانید..."></BlockUI>      
-  <md-layout md-flex="20" md-align="center" md-flex-xsmall="100" md-flex-small="100" md-flex-medium="50" md-vertical-align="center  ">
-      <h1>ورود به حساب کاربری</h1>
-    <form novalidate @submit.stop.prevent="submit">
-        <md-input-container md-clearable dir="ltr">
-            <md-icon>email</md-icon>
-            <label>ایمیل</label>
-            <md-input required v-model="email" type="email" :class="{'md-input-invalid': 'emailValid'}"></md-input>
-            <!-- <md-tooltip>لطفآ ایمیل خود را وارد نمایید</md-tooltip> -->
-            <span class="md-error">{{invalidEmailMessage}}</span>
-        </md-input-container>
-        <md-input-container md-has-password dir="ltr">
-            <md-icon>security</md-icon>
-            <label>کلمه عبور</label>
-            <md-input required @keyup.enter.native="login()" v-model="password" type="password" :class="{'md-input-invalid': 'passwordValid'}"></md-input>
-            <!-- <md-tooltip>لطفآ کلمه عبور خود را وارد نمایید</md-tooltip>             -->
-            <span class="md-error">{{invalidPasswordMessage}}</span>
-        </md-input-container>
-        <md-checkbox id="rememberMe" name="rememberMe" v-model="rememberMe" class="md-primary">مرا به خاطر بسپار</md-checkbox>        
-        <md-layout md-gutter>
-             <md-layout md-flex="100">
-                <md-button :disabled="(!emailValid || !passwordValid)" class="md-raised md-primary" @click="login()">ورود</md-button>
-            </md-layout>  
-            <md-layout md-align="center" md-flex="100">
-                <md-button class="md-primary" href="#/authentication/register">قبلا ثبت نام نکرده اید؟ ثبت نام کنید</md-button>
-            </md-layout>            
-        </md-layout>                        
-    </form>
-    <button @click="test()">Shaahin</button>
-  </md-layout>  
-</md-layout>
+  <section class="section">
+    <BlockUI v-if="isLoading" :html="html" message="لطفآ منتظر بمانید..."></BlockUI>      
+    <div class="columns">  
+      <div class="column">
+        <div class="box">
+          <h1>ورود به حساب کاربری</h1>
+            <div class="field" dir="ltr">
+              <label class="label" dir="rtl">ایمیل</label>
+              <div class="control has-icons-left has-icons-right">
+                <input v-model="email" class="input" :class="{'is-danger': !emailValid}" type="email" placeholder="ایمیل خود را وارد نمایید">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-envelope"></i>
+                </span>              
+                <span v-if="!emailValid" class="icon is-small is-right">
+                  <i class="fa fa-warning"></i>
+                </span>
+              </div>
+              <p dir="rtl" class="help my-height is-danger">{{invalidEmailMessage}}</p>
+            </div>
+            <div class="field" dir="ltr">
+              <label class="label" dir="rtl">کلمه عبور</label>
+              <div class="control has-icons-left has-icons-right">
+                <input @keyup.enter="login()" v-model="password" :class="{'is-danger': !passwordValid}" class="input" type="password">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-lock"></i>
+                </span>
+                <span v-if="!passwordValid" class="icon is-small is-right">
+                  <i class="fa fa-warning"></i>
+                </span>
+              </div>
+              <p dir="rtl" class="help my-height is-danger">{{invalidPasswordMessage}}</p>
+            </div>
+            <div class="field" dir="rtl">
+              <div class="control my-checkbox">
+                <label class="checkbox">
+                  <input type="checkbox">
+                  مرا بخاطر بسپار
+                </label>
+              </div>
+            </div>
+            <div class="field is-grouped">
+            <div class="control">
+              <button v-bind:disabled="(!emailValid || !passwordValid)" @click="login()" class="button is-link">ورود</button>
+            </div>
+            <div class="control">
+              <router-link class="button is-white" to="register">قبلا ثبت نام نکرده اید؟ ثبت نام کنید</router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 <script>
 import { HttpCall } from "./../../utils/axios-config";
@@ -41,11 +61,11 @@ export default {
     return {
       email: "",
       emailValid: false,
-      invalidEmailMessage: "",
+      invalidEmailMessage: " ",
       rememberMe: false,
       password: "",
       passwordValid: false,
-      invalidPasswordMessage: "",
+      invalidPasswordMessage: " ",
       isLoading: false,
       html: '<img src="static/puff.svg" />'
     };
@@ -78,22 +98,19 @@ export default {
           localStorage.setItem("exp", success.data.expiration);
           var token = new auth();
           this.isLoading = false;
-
           let myToast = this.$toasted
             .show(`خوش آمدید ${token.getUserName()} .`, options)
             .goAway(5000);
           this.$router.push("/");
         },
         error => {
-          let myToast = this.$toasted
-            .error(`${error} .`, options)
-            .goAway(5000);
+          let myToast = this.$toasted.error(`${error} .`, options).goAway(5000);
           this.isLoading = false;
         }
       );
-      apiCall.post("authentication/token", payload, context);
-    }  
-  },  
+      apiCall.authentication("authentication/token", payload, context);
+    }
+  },
   watch: {
     email: function() {
       var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -124,21 +141,23 @@ export default {
 };
 </script>
 
-<style lang="scss">
-form {
-  width: 98%;
-  height: 400px;
+<style lang="scss" scoped>
+.column {
+  align-content: center;
+  // text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
 }
-.md-input-container {
-  margin-top: 20px;
+.columns .field {
+  margin-top: 24px;
 }
-.md-checkbox-label {
-  margin-right: 8px !important;
+.my-height{
+  min-height: 18px;
 }
 
-.md-input-container .md-error {
-  opacity: 1;
-  color: red;
+.my-checkbox {
+  text-align: right;  
+  direction: rtl;
 }
 </style>
 

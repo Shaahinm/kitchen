@@ -64,8 +64,18 @@ export class HttpCall {
       });
   }
 
-  test(version) {        
-    versionManager.handle(versionManager.getToken());
+
+  authentication(endpoint, params, context) {
+    axios.post(`${baseURL}/${endpoint}`, params, this.header())
+      .then((response) => {
+        context.success(response);
+      }).catch((response) => {
+        context.error(response);
+      });
+  }
+
+  test() {        
+    
   }
 
   triggerCacheUpdate(caller) {

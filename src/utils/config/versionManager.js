@@ -28,9 +28,7 @@ export class versionManager {
   // if a token already exists, we check if server version == client version
   // if it is not, we update the cache from server and update the token
   static checkVersion(serverVersion) {
-    var clientVersion = this.getToken();
-    console.log(clientVersion);
-    console.log(serverVersion);
+    var clientVersion = this.getToken();    
     if (clientVersion == serverVersion) {
       console.log('check version if', serverVersion);
       return;

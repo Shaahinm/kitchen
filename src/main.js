@@ -3,26 +3,51 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import VueMaterial from 'vue-material'
+
 import BlockUI from 'vue-blockui'
 import Toasted from 'vue-toasted'
-import VueProgressiveImage from 'vue-progressive-image'
+import VueProgressBar from 'vue-progressbar'
+import VueQuillEditor from 'vue-quill-editor'
 
-import {Notification} from './utils/notification'
-import {Theme} from './utils/theme'
-
-import 'vue-material/dist/vue-material.css'
+import VeeValidate from 'vee-validate'
+import messagesFa from 'vee-validate/dist/locale/fa'
 
 
-Vue.use(VueMaterial)
+import {
+  Notification
+} from './utils/notification'
+
+
+import 'bulma/css/bulma.css'
+
+const options = {
+  color: '#bffaf3',
+  failedColor: '#874b4b',
+  thickness: '3px',
+  transition: {
+    speed: '0.2s',
+    opacity: '0.6s',
+    termination: 300
+  },
+  autoRevert: true,
+  location: 'top',
+  inverse: false
+};
+
+Vue.use(VueProgressBar, options)
+
+
 Vue.use(Toasted)
 Vue.use(BlockUI)
-Vue.use(VueProgressiveImage)
+Vue.use(VeeValidate);
+Vue.use(VueQuillEditor)
+
+VeeValidate.Validator.localize('fa', messagesFa);
 Vue.config.productionTip = false
 
 
 new Notification(Vue);
-new Theme(Vue);
+
 
 
 /* eslint-disable no-new */
@@ -30,6 +55,9 @@ new Vue({
   el: '#app',
   router,
   template: '<App/>',
-  components: { App }
+  components: {
+    App
+  },
+  mounted() {    
+  }
 })
-

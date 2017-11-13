@@ -1,35 +1,34 @@
-<template>  
+<template>      
+    <div class="columns">
+        <div class="column" v-for="n in 4" v-bind:key="n">
+            <div class="card">
+                <div class="card-image">
+                    <figure class="image is-4by3">
+                     <img src="static/card-image-1.jpg" alt="People">
+                    </figure>
+                </div>
+                <div class="card-content">
+                    <div class="media">
+                    <div class="media-left">
+                        <figure class="image is-48x48">
+                        <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <p class="title is-4">قرمه سبزی</p>
+                        <p class="subtitle is-6">@شاهین</p>
+                    </div>
+                    </div>
 
-    <md-layout md-gutter>        
-        <md-layout md-flex-xsmall="100" md-flex-small="100" md-flex-medium="100" md-flex-large="100">            
-           <md-card v-for="n in 4">               
-                <md-card-media>
-                    <img src="static/card-image-1.jpg" alt="People">
-                </md-card-media>
-
-                <md-card-header>
-                    <div class="md-title">Title goes here</div>
-                    <div class="md-subhead">Subtitle here</div>
-                </md-card-header>
-
-                <md-card-expand>
-                    <md-card-actions>
-                    <md-button>Action</md-button>
-                    <md-button>Action</md-button>
-                    <span style="flex: 1"></span>
-                    <md-button class="md-icon-button" md-expand-trigger>
-                        <md-icon>keyboard_arrow_down</md-icon>
-                    </md-button>
-                    </md-card-actions>
-
-                    <md-card-content>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non, voluptas eius illo quas, saepe voluptate pariatur in deleniti minus sint. Excepturi.
-                    </md-card-content>
-                </md-card-expand>
-            </md-card>
-        </md-layout> 
-                                     
-    </md-layout>
+                    <div class="content">
+                        یک متن نوشته شده فارسی ترجیحا بلند باشد که حداقل ۲ خط را بگیرد                    
+                    <br>
+                    <time datetime="17/08/1396">17/08/1396</time>
+                    </div>
+                </div>
+        </div>  
+        </div>
+    </div>                                                   
 </template>
 <script>
 export default {
@@ -42,9 +41,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.md-card{
-    margin: 8px;
-    max-width: 300px;
-}
+
 </style>
 
