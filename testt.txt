@@ -1,1 +1,4 @@
 abbas
+103
+down vote
+You can use git push -u <remote_name> <local_branch_name> to set the default upstream
