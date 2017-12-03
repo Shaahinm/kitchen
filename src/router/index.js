@@ -19,6 +19,7 @@ import CreateRecipeIngredientsParts from '@/components/recipe/ingredinets/part'
 import CreateRecipeInstruction from '@/components/recipe/instruction/instruction'
 import UnsavedRecipes from '@/components/recipe/all/unsavedrecipes'
 import HelpComponent from '@/components/utility/help'
+import SearchComponent from '@/components/search/search'
 import TestComponent from '@/components/test/test'
 
 import ConfirmationDialog from '@/components/utility/confirmationdialog'
@@ -47,6 +48,7 @@ export default new Router({
     { path: '/', name: 'home', component: HelloWorld },
     { path: '/about', name: 'about', component: About },
     { path: '/test', name: 'test', component: TestComponent },
+    { path: '/search/:query?', name: 'search', component: SearchComponent },
     { path: '/kitchen', name: 'kitchen', component: Kitchen},
     { path: '/kitchen/recipes/create', name: 'create-recipe', component: CreateRecipe},    
     { path: '/kitchen/recipes/edit/:id/basicinfo', name: 'edit-recipe-basic-info', component: CreateRecipeBasicInfo},

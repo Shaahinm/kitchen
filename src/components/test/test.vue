@@ -1,11 +1,18 @@
 <template>
   <div class="container">
       <br>
-      <button @click="savetolocal()" class="button">save to localstorage</button>
-      <button @click="deleteFromLocal()" class="button">delete from localstorage</button>
+      <button @click="savetolocal" class="button">save to localstorage</button>
+      <button @click="deleteFromLocal" class="button">delete from localstorage</button>
       <br>
       <br>
-      <input class="input" type="text" @keyup="search()" v-model="query">
+      <input list="browsers" class="input" type="text" @keyup="search" v-model="query">
+      <datalist id="browsers">
+        <option v-for="(item, index) in res" :key="index" :value="item" />
+        <!-- <option value="Firefox" />
+        <option value="Chrome" />
+        <option value="Opera" />
+        <option value="Safari" /> -->
+    </datalist>
       <div>{{res}}</div>
   </div>
 </template>
@@ -14,8 +21,7 @@ import json from "./../../test-data.json";
 export default {
   data() {
     return {
-      res: {},
-      local: [],
+      res: [],
       query: ""
     };
   },
@@ -28,12 +34,17 @@ export default {
     },
     search() {
       this.res = [];
-      json.forEach(x => {
-        if (x.name.includes(this.query)) {
-          this.res.push(x.name);
-        }
-      });
+      if (this.query.length >= 2) {
+        json.forEach(x => {
+          if (x.name.includes(this.query)) {
+            this.res.push(x.name);            
+          }
+        });
+      }
     }
+  },
+  mounted() {
+    //   this.res = json;
   }
 };
 </script>

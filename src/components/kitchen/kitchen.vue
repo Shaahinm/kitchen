@@ -6,6 +6,7 @@
   <div class="main">
     <kitchen-main :favs="favs" :recipes="recepies"></kitchen-main>
     <button @click="test()">progress</button>
+    <button @click="test2()">abbas</button>
   </div>  
 </section>
     
@@ -51,6 +52,9 @@ export default {
       Notification.doMeWithProgress(this.$Progress, () => {
         console.log("sadsasdasd");
       });
+    },
+    test2() {
+      this.$mynotify.notify('abbasian');
     }
   },
   mounted() {}

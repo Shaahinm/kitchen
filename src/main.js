@@ -6,8 +6,10 @@ import router from './router'
 
 import BlockUI from 'vue-blockui'
 import Toasted from 'vue-toasted'
+import AutoComplete from 'v-autocomplete'
 import VueProgressBar from 'vue-progressbar'
 import VueQuillEditor from 'vue-quill-editor'
+import mynotify from './plugins/mynotify'
 
 import VeeValidate from 'vee-validate'
 import messagesFa from 'vee-validate/dist/locale/fa'
@@ -17,6 +19,7 @@ import {
   Notification
 } from './utils/notification'
 
+import 'v-autocomplete/dist/v-autocomplete.css'
 
 import 'bulma/css/bulma.css'
 
@@ -35,11 +38,11 @@ const options = {
 };
 
 Vue.use(VueProgressBar, options)
-
-
+Vue.use(AutoComplete)
+Vue.use(mynotify)
 Vue.use(Toasted)
 Vue.use(BlockUI)
-Vue.use(VeeValidate);
+Vue.use(VeeValidate)
 Vue.use(VueQuillEditor)
 
 VeeValidate.Validator.localize('fa', messagesFa);
