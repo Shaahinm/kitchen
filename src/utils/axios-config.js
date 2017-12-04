@@ -1,7 +1,7 @@
 import axios from 'axios';
-import {
-  auth
-} from './auth';
+// import {
+//   auth
+// } from './auth';
 import {
   ServerError
 } from './config/errorList'
@@ -22,11 +22,15 @@ import {
 const baseURL = `http://localhost:49716/api`;
 export class HttpCall {
 
+  constructor(auth) {
+    this.auth = auth;
+  }
+
   header() {
-    var token = new auth();
-    if (token.isLoggedIn()) {
+    // var token = new auth();
+    if (this.auth.isLoggedIn()) {
       return {
-        headers: {
+        headers: {          
           Authorization: `Bearer ${token.token()}`
         }
       };

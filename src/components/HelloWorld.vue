@@ -1,5 +1,5 @@
 <template>
- <span>salam</span>
+ <span>{{msg}}</span>
 </template>
 
 <script>
@@ -7,7 +7,7 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      msg: "Shaahin Made this"
+      msg: this.$auth.getUserName()
     };
   },
   mounted() {

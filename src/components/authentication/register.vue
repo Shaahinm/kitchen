@@ -111,7 +111,6 @@
 </template>
 <script>
 import { HttpCall } from "./../../utils/axios-config";
-import { auth } from "./../../utils/auth";
 export default {
   data() {
     return {
@@ -213,8 +212,7 @@ export default {
     }
   },
   beforeCreate() {
-    var authentication = new auth();
-    authentication.logout();
+    this.$auth.logout();
   }
 };
 </script>

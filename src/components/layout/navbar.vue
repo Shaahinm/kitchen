@@ -162,6 +162,7 @@
 
 <script>
 import ItemTemplate from "./suggestionTemplate";
+import data from "./../../test-data"
 export default {
   name: "navbar",
   data: () => ({
@@ -238,8 +239,8 @@ export default {
       this.allSuggestions = JSON.parse(localStorage.getItem("search"));
     } else {
       // we need to call api and get the result
-    }
-    console.log("navbar loaded");
+      localStorage.setItem("search", JSON.stringify(data));
+    }    
   }
 };
 </script>

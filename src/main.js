@@ -10,9 +10,11 @@ import AutoComplete from 'v-autocomplete'
 import VueProgressBar from 'vue-progressbar'
 import VueQuillEditor from 'vue-quill-editor'
 import mynotify from './plugins/mynotify'
+import auth from './plugins/auth'
 
 import VeeValidate from 'vee-validate'
 import messagesFa from 'vee-validate/dist/locale/fa'
+
 
 
 import {
@@ -40,6 +42,7 @@ const options = {
 Vue.use(VueProgressBar, options)
 Vue.use(AutoComplete)
 Vue.use(mynotify)
+Vue.use(auth)
 Vue.use(Toasted)
 Vue.use(BlockUI)
 Vue.use(VeeValidate)
@@ -61,6 +64,6 @@ new Vue({
   components: {
     App
   },
-  mounted() {    
+  mounted() {     
   }
 })

@@ -50,12 +50,11 @@
         </div>
       </div>
     </div>
+    <button @click="test">abbas</button>
   </section>
 </template>
 <script>
 import { HttpCall } from "./../../utils/axios-config";
-import { auth } from "./../../utils/auth";
-// import Snackbar from './../snackbar'
 export default {
   data() {
     return {
@@ -72,7 +71,7 @@ export default {
   },
   methods: {
     login() {
-      const apiCall = new HttpCall();
+      const apiCall = new HttpCall(this.$auth);
       const payload = {
         email: this.email,
         password: this.password
@@ -93,15 +92,19 @@ export default {
         fitToScreen: true
       };
       var context = apiCall.getContext(
-        success => {
-          localStorage.setItem("token", success.data.token);
-          localStorage.setItem("exp", success.data.expiration);
-          var token = new auth();
+        success => {          
+          this.$auth.login(success.data.token, success.data.expiration);          
           this.isLoading = false;
-          let myToast = this.$toasted
-            .show(`خوش آمدید ${token.getUserName()} .`, options)
+          let myToast = this.$toasted          
+            .show(`خوش آمدید ${this.$auth.getUserName()} .`, options)
             .goAway(5000);
-          this.$router.push("/");
+          
+          let redirect = this.$route.query.redirect;                    
+          if(redirect) {
+            this.$router.push(redirect)
+          } else {
+            this.$router.push("/");
+          }          
         },
         error => {
           let myToast = this.$toasted.error(`${error} .`, options).goAway(5000);
@@ -109,6 +112,9 @@ export default {
         }
       );
       apiCall.authentication("authentication/token", payload, context);
+    },
+    test() {
+      this.$auth.logout();
     }
   },
   watch: {
@@ -132,12 +138,12 @@ export default {
       }
     }
   },
-  beforeCreate() {
-    var authentication = new auth();
-    if (authentication.isLoggedIn()) {
-      this.$router.push("/");
-    }
-  }
+  // beforeCreate() {
+  //   var authentication = new auth();
+  //   if (authentication.isLoggedIn()) {
+  //     this.$router.push("/");
+  //   }
+  // }
 };
 </script>
 
